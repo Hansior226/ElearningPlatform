@@ -1,0 +1,47 @@
+﻿@model CourseManagement.Models.Course
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Title</dt>
+        <dd>@Model.Title</dd>
+        <dt>Description</dt>
+        <dd>@Model.Description</dd>
+        <dt>Instructor</dt>
+        <dd>@Model.Instructor</dd>
+        <dt>Lessons</dt>
+        <dd>
+            <ul>
+                @foreach (var lesson in Model.Lessons)
+                {
+                    <li>@lesson.Title (Duration: @lesson.Duration min)</li>
+                    <ul>
+                        @foreach (var material in lesson.Materials)
+                        {
+                            <li>@material.Title (@material.Type)</li>
+                        }
+                    </ul>
+                }
+            </ul>
+        </dd>
+        <dt>Grades</dt>
+        <dd>
+            <ul>
+                @foreach (var grade in Model.Grades)
+                {
+                    <li>Student: @grade.StudentId, Grade: @grade.GradeValue, Comment: @grade.Comment</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>
