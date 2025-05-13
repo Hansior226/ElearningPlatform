@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "6823a291139d78d2551e7dc9"
+  },
+  "title": "Programowanie w C#",
+  "description": "Kurs wprowadzający do programowania w C#",
+  "instructor": "Jan Kowalski",
+  "lessons": [
+    {
+      "lessonId": 1,
+      "title": "Wprowadzenie do C#",
+      "duration": 45,
+      "materials": [
+        {
+          "type": "video",
+          "url": "http://example.com/video1",
+          "title": "Wprowadzenie"
+        },
+        {
+          "type": "pdf",
+          "url": "http://example.com/pdf1",
+          "title": "Notatki"
+        }
+      ]
+    },
+    {
+      "lessonId": 2,
+      "title": "Zmienne i typy danych",
+      "duration": 60,
+      "materials": [
+        {
+          "type": "video",
+          "url": "http://example.com/video2",
+          "title": "Zmienne"
+        }
+      ]
+    }
+  ],
+  "grades": [
+    {
+      "studentId": "s1",
+      "grade": 4.5,
+      "comment": "Świetny kurs!"
+    },
+    {
+      "studentId": "s2",
+      "grade": 5,
+      "comment": "Bardzo pomocny."
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6823a291139d78d2551e7dca"
+  },
+  "title": "Bazy danych MongoDB",
+  "description": "Kurs o NoSQL i MongoDB",
+  "instructor": "Anna Nowak",
+  "lessons": [
+    {
+      "lessonId": 1,
+      "title": "Wprowadzenie do NoSQL",
+      "duration": 50,
+      "materials": [
+        {
+          "type": "pdf",
+          "url": "http://example.com/nosql",
+          "title": "NoSQL Basics"
+        }
+      ]
+    }
+  ],
+  "grades": [
+    {
+      "studentId": "s3",
+      "grade": 4,
+      "comment": "Dobra organizacja."
+    }
+  ]
+}]
