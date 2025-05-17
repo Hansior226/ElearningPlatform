@@ -299,6 +299,10 @@
     <Content Include="Views\Materials\Delete.cshtml" />
     <Content Include="Views\Materials\Edit.cshtml" />
     <Content Include="Views\Materials\Index.cshtml" />
+    <Content Include="Views\Grades\Create.cshtml" />
+    <Content Include="Views\Grades\Delete.cshtml" />
+    <Content Include="Views\Grades\Edit.cshtml" />
+    <Content Include="Views\Grades\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
