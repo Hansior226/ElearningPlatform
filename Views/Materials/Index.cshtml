@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CourseManagement.Models.Material>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Materials</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Materials</h2>
+        <p><a href="@Url.Action("Create", new { courseId = ViewBag.CourseId, lessonId = ViewBag.LessonId })" class="btn btn-primary">Create New</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>URL</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int index = 0;
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.Type</td>
+                            <td><a href="@item.Url">@item.Url</a></td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { courseId = ViewBag.CourseId, lessonId = ViewBag.LessonId, materialIndex = index })" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="@Url.Action("Delete", new { courseId = ViewBag.CourseId, lessonId = ViewBag.LessonId, materialIndex = index })" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                }
+            </tbody>
+        </table>
+        <a href="@Url.Action("Index", "Lessons", new { courseId = ViewBag.CourseId })" class="btn btn-secondary">Back to Lessons</a>
+    </div>
+</body>
+</html>
