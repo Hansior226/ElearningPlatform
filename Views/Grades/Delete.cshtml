@@ -1,0 +1,25 @@
+﻿@model CourseManagement.Models.Grade
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Grade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Delete Grade</h2>
+        <h4>Are you sure you want to delete this?</h4>
+        <div>
+            <strong>Student ID:</strong> @Model.StudentId<br />
+            <strong>Grade:</strong> @Model.GradeValue<br />
+            <strong>Comment:</strong> @Model.Comment
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger mt-3">Delete</button>
+            <a href="@Url.Action("Index", new { courseId = ViewBag.CourseId })" class="btn btn-secondary mt-3">Back</a>
+        }
+    </div>
+</body>
+</html>
