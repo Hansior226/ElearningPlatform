@@ -1,0 +1,30 @@
+﻿@model CourseManagement.Models.Lesson
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Lesson</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Edit Lesson</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.LessonId)
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Title, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Duration, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="@Url.Action("Index", new { courseId = ViewBag.CourseId })" class="btn btn-secondary">Back</a>
+        }
+    </div>
+</body>
+</html>

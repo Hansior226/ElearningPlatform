@@ -1,0 +1,34 @@
+﻿@model CourseManagement.Models.Course
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Course</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Create Course</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Title, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Description, new { @class = "form-label" })
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Instructor, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Instructor, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Instructor, "", new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Back</a>
+        }
+    </div>
+</body>
+</html>
