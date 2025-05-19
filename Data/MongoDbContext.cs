@@ -13,9 +13,7 @@ namespace CourseManagement.Data
             _database = client.GetDatabase("CourseDB");
         }
 
-        public IMongoCollection<Course> Courses
-        {
-            get { return _database.GetCollection<Course>("courses"); }
-        }
+        public IMongoCollection<Course> Courses => _database.GetCollection<Course>("courses");
+        public IMongoCollection<Image> Images => _database.GetCollection<Image>("images");
     }
 }

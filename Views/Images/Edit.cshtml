@@ -1,0 +1,39 @@
+﻿@model CourseManagement.Models.Image
+
+@{
+    ViewBag.Title = "Edytuj obrazek";
+}
+
+<h2>Edytuj obrazek</h2>
+
+@using (Html.BeginForm("Edit", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Nowy plik obrazka</label>
+        <div class="col-md-10">
+            <input type="file" name="file" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
+            <input type="submit" value="Zapisz" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Powrót do listy", "Index", new { courseId = ViewBag.CourseId })
+</div>

@@ -1,7 +1,6 @@
 ﻿using CourseManagement.Data;
 using CourseManagement.Models;
 using MongoDB.Driver;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -56,11 +55,10 @@ namespace CourseManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                course.Lessons = new List<Lesson>();
-                course.Grades = new List<Grade>();
                 await _context.Courses.InsertOneAsync(course);
                 return RedirectToAction("Index");
             }
+
             return View(course);
         }
 
@@ -72,10 +70,7 @@ namespace CourseManagement.Controllers
                 return HttpNotFound();
             }
 
-            var course = await _context.Courses
-                .Find(c => c.Id == id)
-                .FirstOrDefaultAsync();
-
+            var course = await _context.Courses.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (course == null)
             {
                 return HttpNotFound();
@@ -89,17 +84,30 @@ namespace CourseManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(string id, Course course)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return HttpNotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                var filter = Builders<Course>.Filter.Eq(c => c.Id, id);
-                var update = Builders<Course>.Update
-                    .Set(c => c.Title, course.Title)
-                    .Set(c => c.Description, course.Description)
-                    .Set(c => c.Instructor, course.Instructor);
+                var existingCourse = await _context.Courses.Find(c => c.Id == id).FirstOrDefaultAsync();
+                if (existingCourse == null)
+                {
+                    return HttpNotFound();
+                }
 
-                await _context.Courses.UpdateOneAsync(filter, update);
+                existingCourse.Name = course.Name; // Zmieniono Title na Name
+                existingCourse.Description = course.Description;
+                existingCourse.Instructor = course.Instructor;
+                existingCourse.Lessons = course.Lessons;
+                existingCourse.Grades = course.Grades;
+                existingCourse.Materials = course.Materials;
+
+                await _context.Courses.ReplaceOneAsync(c => c.Id == id, existingCourse);
                 return RedirectToAction("Index");
             }
+
             return View(course);
         }
 
@@ -111,10 +119,7 @@ namespace CourseManagement.Controllers
                 return HttpNotFound();
             }
 
-            var course = await _context.Courses
-                .Find(c => c.Id == id)
-                .FirstOrDefaultAsync();
-
+            var course = await _context.Courses.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (course == null)
             {
                 return HttpNotFound();

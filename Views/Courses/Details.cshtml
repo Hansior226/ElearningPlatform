@@ -1,47 +1,36 @@
 ﻿@model CourseManagement.Models.Course
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły kursu";
+
+    var lessonsDisplay = Model.Lessons.Any() ? string.Join(", ", Model.Lessons.Select(l => l.Title)) : "Brak lekcji";
+    var materialsDisplay = Model.Materials.Any() ? string.Join(", ", Model.Materials.Select(m => m.Title)) : "Brak materiałów";
+    var gradesDisplay = Model.Grades.Any() ? string.Join(", ", Model.Grades.Select(g => $"{g.StudentId}: {g.GradeValue}")) : "Brak ocen";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>Course</h4>
+    <h4>Kurs</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Title</dt>
-        <dd>@Model.Title</dd>
-        <dt>Description</dt>
+        <dt>ID</dt>
+        <dd>@Model.Id</dd>
+        <dt>Nazwa</dt>
+        <dd>@Model.Name</dd>
+        <dt>Opis</dt>
         <dd>@Model.Description</dd>
-        <dt>Instructor</dt>
+        <dt>Instruktor</dt>
         <dd>@Model.Instructor</dd>
-        <dt>Lessons</dt>
-        <dd>
-            <ul>
-                @foreach (var lesson in Model.Lessons)
-                {
-                    <li>@lesson.Title (Duration: @lesson.Duration min)</li>
-                    <ul>
-                        @foreach (var material in lesson.Materials)
-                        {
-                            <li>@material.Title (@material.Type)</li>
-                        }
-                    </ul>
-                }
-            </ul>
-        </dd>
-        <dt>Grades</dt>
-        <dd>
-            <ul>
-                @foreach (var grade in Model.Grades)
-                {
-                    <li>Student: @grade.StudentId, Grade: @grade.GradeValue, Comment: @grade.Comment</li>
-                }
-            </ul>
-        </dd>
+        <dt>Lekcje</dt>
+        <dd>@lessonsDisplay</dd>
+        <dt>Materiały</dt>
+        <dd>@materialsDisplay</dd>
+        <dt>Oceny</dt>
+        <dd>@gradesDisplay</dd>
     </dl>
 </div>
-<p>
-    <a asp-action="Index">Back to List</a>
-</p>
+<div>
+    @Html.ActionLink("Zarządzaj obrazkami", "Index", "Images", new { courseId = Model.Id }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Powrót do listy", "Index", "Courses")
+</div>

@@ -1,0 +1,23 @@
+﻿@model CourseManagement.Models.Image
+
+@{
+    ViewBag.Title = "Usuń obrazek";
+}
+
+<h3>Czy na pewno chcesz usunąć ten obrazek?</h3>
+<div>
+    <h4>Obrazek</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Nazwa</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+    </dl>
+
+    @using (Html.BeginForm("DeleteConfirmed", "Images", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+        <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> 
+@Html.ActionLink("Anuluj", "Index", new { courseId = ViewBag.CourseId })
+    }

@@ -10,8 +10,8 @@ namespace CourseManagement.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("title")]
-        public string Title { get; set; }
+        [BsonElement("name")]
+        public string Name { get; set; }
 
         [BsonElement("description")]
         public string Description { get; set; }
@@ -20,10 +20,14 @@ namespace CourseManagement.Models
         public string Instructor { get; set; }
 
         [BsonElement("lessons")]
-        public List<Lesson> Lessons { get; set; }
+        public List<Lesson> Lessons { get; set; } = new List<Lesson>(); // Inicjalizacja jako pusta lista
 
         [BsonElement("grades")]
-        public List<Grade> Grades { get; set; }
+        public List<Grade> Grades { get; set; } = new List<Grade>(); // Inicjalizacja jako pusta lista
+
+        // Pole do przechowywania listy materiałów (zgodne z wcześniejszym kodem widoku)
+        [BsonElement("materials")]
+        public List<Material> Materials { get; set; } = new List<Material>(); // Inicjalizacja jako pusta lista
     }
 
     public class Lesson
@@ -38,7 +42,7 @@ namespace CourseManagement.Models
         public int Duration { get; set; }
 
         [BsonElement("materials")]
-        public List<Material> Materials { get; set; }
+        public List<Material> Materials { get; set; } = new List<Material>(); // Inicjalizacja jako pusta lista
     }
 
     public class Material
